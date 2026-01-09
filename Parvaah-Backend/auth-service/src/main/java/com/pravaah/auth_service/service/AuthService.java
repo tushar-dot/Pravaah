@@ -15,12 +15,16 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public  String login(String username, String password){
-        User user = userRepository.findByUserName(username).orElseThrow(() -> new RuntimeException("User not found."));
+    public String login(String emailId, String rawPassword) {
 
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        User user = userRepository.findByUserName(emailId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
+
         return "Login successful";
     }
+
 }

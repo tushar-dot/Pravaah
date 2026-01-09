@@ -16,7 +16,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request){
-        return ResponseEntity.ok(authService.login(request.getUserName(), request.getPassword()));
+        return ResponseEntity.ok(authService.login(request.getEmailId(), request.getPassword()));
     }
+
+    @GetMapping("/hi")
+    public ResponseEntity<String> sayHi(){
+        return ResponseEntity.ok("Hi Sanya");
+    }
+
 
 }
