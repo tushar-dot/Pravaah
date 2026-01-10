@@ -5,26 +5,32 @@ import com.pravaah.auth_service.repo.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AuthService {
-    private final UserRepository userRepository;
-    private  final PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
-    public String login(String emailId, String rawPassword) {
+    public String login(String email, String password) {
 
-        User user = userRepository.findByUserName(emailId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmailId(email)
+                .orElseThrow(() -> new RuntimeException("Invalid email"));
 
-        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
-        return "Login successful";
+        return jwtService.generateToken(user.getEmailId());
     }
-
 }
+

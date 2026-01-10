@@ -13,6 +13,10 @@ target/
 .springBeans
 .sts4-cache
 
+### 🔐 Spring Boot config (ADD THIS) ###
+src/main/resources/application.properties
+src/main/resources/application.yml
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
