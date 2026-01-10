@@ -3,6 +3,7 @@ package com.pravaah.auth_service.controller;
 import com.pravaah.auth_service.dto.LoginRequest;
 import com.pravaah.auth_service.service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +21,13 @@ public class AuthController {
     }
 
     @GetMapping("/hi")
-    public ResponseEntity<String> sayHi(){
-        return ResponseEntity.ok("Hi Sanya");
+    public ResponseEntity<String> sayHi(Authentication authentication) {
+
+        String email = authentication.getName();
+
+        return ResponseEntity.ok("Hi " + email);
     }
+
 
 
 }
