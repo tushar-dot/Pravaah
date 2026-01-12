@@ -39,4 +39,12 @@ public class JwtService {
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
