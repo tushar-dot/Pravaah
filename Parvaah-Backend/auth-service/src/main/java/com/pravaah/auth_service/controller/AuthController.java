@@ -5,7 +5,7 @@ import com.pravaah.auth_service.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -17,6 +17,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request){
+        System.out.println("Called");
         return ResponseEntity.ok(authService.login(request.getEmailId(), request.getPassword()));
     }
 
