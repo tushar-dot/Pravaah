@@ -15,7 +15,7 @@ public class CaseService {
         this.caseRepository =  caseRepository;
     }
 
-    public void createCase(CaseDTO caseRequest){
+    public Case createCase(CaseDTO caseRequest){
         Case newCase = new Case();
 
         newCase.setCaseNumber(generateCaseNumber());
@@ -28,6 +28,7 @@ public class CaseService {
         newCase.setUpdatedBy("System");
 
         caseRepository.save(newCase);
+        return newCase;
     }
 
     private String generateCaseNumber() {

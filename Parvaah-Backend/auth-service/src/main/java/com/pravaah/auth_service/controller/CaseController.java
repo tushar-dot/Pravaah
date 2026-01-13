@@ -2,6 +2,7 @@ package com.pravaah.auth_service.controller;
 
 import com.pravaah.auth_service.dto.CaseDTO;
 import com.pravaah.auth_service.dto.LoginRequest;
+import com.pravaah.auth_service.entity.Case;
 import com.pravaah.auth_service.service.AuthService;
 import com.pravaah.auth_service.service.CaseService;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,10 @@ public class CaseController {
     }
 
     @PostMapping("/create-case")
-    public ResponseEntity<String> login(@RequestBody CaseDTO caseRequest){
+    public ResponseEntity<Case> login(@RequestBody CaseDTO caseRequest){
         System.out.println("Called");
-        return ResponseEntity.ok("Case created successfully.");
+
+        return ResponseEntity.ok(caseService.createCase(caseRequest));
     }
 
 }
