@@ -6,15 +6,15 @@ import com.pravaah.auth_service.repo.CaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CaseService {
     private CaseRepository caseRepository;
 
-    public CaseService(CaseRepository caseRepository){
-        this.caseRepository =  caseRepository;
+    public CaseService(CaseRepository caseRepository) {
+        this.caseRepository = caseRepository;
     }
-
     public Case createCase(CaseDTO caseRequest){
         Case newCase = new Case();
 
@@ -34,4 +34,22 @@ public class CaseService {
     private String generateCaseNumber() {
         return "CASE-" + System.currentTimeMillis();
     }
+
+    public List<CaseDTO> getAllCases() {
+
+        return caseRepository.findAll()
+                .stream()
+                .map(c -> {
+                    CaseDTO dto = new CaseDTO();
+                    dto.setCaseId(c.getCaseId());
+                    dto.setCaseNumber(c.getCaseNumber());
+                    dto.setStatus(c.getStatus());
+                    dto.setCreatedAt(c.getCreatedAt());
+                    dto.setCaseDesc(c.getComplaint());
+                    dto.setPriorityId(c.getPriorityId());
+                    return dto;
+                })
+                .toList();
+    }
+
 }
