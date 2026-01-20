@@ -36,6 +36,8 @@ public class User {
     @Column(name = "updated_on")
     private Date updatedOn;
 
+    private String roleName;
+
 
 
 }
