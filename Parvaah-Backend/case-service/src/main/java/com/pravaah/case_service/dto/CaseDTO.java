@@ -1,4 +1,4 @@
-package com.pravaah.auth_service.dto;
+package com.pravaah.case_service.dto;
 
 
 import lombok.AllArgsConstructor;

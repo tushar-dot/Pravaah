@@ -1,6 +1,6 @@
-package com.pravaah.auth_service.repo;
+package com.pravaah.case_service.repo;
 
-import com.pravaah.auth_service.entity.Case;
+import com.pravaah.case_service.entity.Case;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
