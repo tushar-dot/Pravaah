@@ -19,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
-        String token = authService.login(request.getEmailId(), request.getPassword());
+        String token = authService.login(request.getEmailId(), request.getPassword(), request.getRole());
         return ResponseEntity.ok(new LoginResponse(token));
     }
 
@@ -27,6 +27,7 @@ public class AuthController {
     public ResponseEntity<String> sayHi(Authentication authentication) {
 
         String email = authentication.getName();
+
 
         return ResponseEntity.ok("Hi " + email);
     }

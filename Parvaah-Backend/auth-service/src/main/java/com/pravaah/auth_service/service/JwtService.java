@@ -1,5 +1,6 @@
 package com.pravaah.auth_service.service;
 
+import com.pravaah.auth_service.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,9 +19,10 @@ public class JwtService {
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
-    public String generateToken(String email) {
+    public String generateToken(User user) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(user.getEmailId())
+                .claim("role", user.getRole().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -35,6 +37,15 @@ public class JwtService {
                 .getBody();
 
         return claims.getSubject(); // this is the email
+    }
+
+    public String extractRole(String token){
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return  claims.get("role", String.class);
     }
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());

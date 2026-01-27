@@ -1,5 +1,6 @@
 package com.pravaah.auth_service.entity;
 
+import com.pravaah.auth_service.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,8 +37,10 @@ public class User {
     @Column(name = "updated_on")
     private Date updatedOn;
 
-    private String roleName;
-
-
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_name", nullable = true)
+    private Role role;
 }
+
+
+

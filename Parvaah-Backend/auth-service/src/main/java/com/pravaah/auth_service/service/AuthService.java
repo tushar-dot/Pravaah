@@ -21,7 +21,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public String login(String email, String password) {
+    public String login(String email, String password, String role) {
 
         User user = userRepository.findByEmailId(email)
                 .orElseThrow(() -> new RuntimeException("Invalid email"));
@@ -30,7 +30,9 @@ public class AuthService {
             throw new RuntimeException("Invalid password");
         }
 
-        return jwtService.generateToken(user.getEmailId());
+        throw new RuntimeException("Invalid role: " + role);
+
     }
+
 }
 
