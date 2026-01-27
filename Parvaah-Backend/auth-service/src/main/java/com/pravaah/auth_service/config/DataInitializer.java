@@ -1,6 +1,7 @@
 package com.pravaah.auth_service.config;
 
 import com.pravaah.auth_service.entity.User;
+import com.pravaah.auth_service.enums.Role;
 import com.pravaah.auth_service.repo.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class DataInitializer {
         User u = new User();
         u.setUserName(username);
         u.setEmailId("sanyasingh@gmail.com");
+        u.setRole(Role.REQUESTER);
         u.setPassword(passwordEncoder.encode("password123"));
 
         userRepository.save(u);
