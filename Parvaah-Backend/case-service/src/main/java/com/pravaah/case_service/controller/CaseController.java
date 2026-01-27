@@ -1,14 +1,10 @@
-package com.pravaah.auth_service.controller;
+package com.pravaah.case_service.controller;
 
-import com.pravaah.auth_service.dto.ApiResponse;
-import com.pravaah.auth_service.dto.CaseDTO;
-import com.pravaah.auth_service.dto.LoginRequest;
-import com.pravaah.auth_service.entity.Case;
-import com.pravaah.auth_service.service.AuthService;
-import com.pravaah.auth_service.service.CaseService;
+import com.pravaah.case_service.dto.ApiResponse;
+import com.pravaah.case_service.dto.CaseDTO;
+import com.pravaah.case_service.service.CaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.pravaah.auth_service.service;
+package com.pravaah.case_service.service;
 
-import com.pravaah.auth_service.dto.CaseDTO;
-import com.pravaah.auth_service.entity.Case;
-import com.pravaah.auth_service.repo.CaseRepository;
+import com.pravaah.case_service.dto.CaseDTO;
+import com.pravaah.case_service.entity.Case;
+import com.pravaah.case_service.repo.CaseRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
