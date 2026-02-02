@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuDTO {
-    private String menuCode;
-    private String label;
-    private int displayOrder;
+public class PriorityDTO {
+    private int priorityId;
+    private String priorityCode;
 }

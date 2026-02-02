@@ -2,6 +2,7 @@ package com.pravaah.case_service.controller;
 
 import com.pravaah.case_service.dto.ApiResponse;
 import com.pravaah.case_service.dto.CaseDTO;
+import com.pravaah.case_service.entity.Case;
 import com.pravaah.case_service.service.CaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,18 @@ public class CaseController {
     }
 
     @PostMapping("/create-case")
-    public ResponseEntity<ApiResponse<Void>> createCase(@RequestBody CaseDTO caseRequest) {
-        caseService.createCase(caseRequest);
-        ApiResponse<Void> response =
-                new ApiResponse<>(201, "Case created successfully", null);
+    public ResponseEntity<ApiResponse<CaseDTO>> createCase(
+            @RequestBody CaseDTO caseRequest) {
+
+        CaseDTO savedCase = caseService.createCase(caseRequest);
+
+        ApiResponse<CaseDTO> response =
+                new ApiResponse<>(201, "Case created successfully", savedCase);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+
 
     @GetMapping("/allCases")
     public ResponseEntity<ApiResponse<List<CaseDTO>>> getAllCases() {

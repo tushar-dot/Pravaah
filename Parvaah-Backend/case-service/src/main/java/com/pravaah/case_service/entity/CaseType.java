@@ -7,18 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "menu_master")
+@Table(name = "case_type")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Menu {
+public class CaseType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long menuId;
+    @Column(name = "case_type_id")
+    private int casetypeId;
 
-    private String menuCode;
-    private String label;
-    private int displayOrder;
-    private boolean isActive;
+    @Column(name = "case_type_name")
+    private String caseTypeName;
 }

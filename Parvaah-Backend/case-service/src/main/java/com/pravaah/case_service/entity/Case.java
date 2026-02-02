@@ -21,7 +21,7 @@ public class Case {
     private long caseId;
 
     @Column(name = "case_type_id")
-    private long caseTypeId;
+    private int caseTypeId;
 
     @Column(name = "case_number", unique = true, nullable = false)
     private String caseNumber;
