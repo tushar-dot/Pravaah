@@ -15,11 +15,14 @@ public class CaseService {
     public CaseService(CaseRepository caseRepository) {
         this.caseRepository = caseRepository;
     }
-    public Case createCase(CaseDTO caseRequest){
+
+    public CaseDTO createCase(CaseDTO caseRequest) {
+
         Case newCase = new Case();
 
         newCase.setCaseNumber(generateCaseNumber());
-        newCase.setComplaint((caseRequest.getCaseDesc()));
+        newCase.setCaseTypeId(caseRequest.getCaseTypeId());
+        newCase.setComplaint(caseRequest.getComplaint());
         newCase.setPriorityId(caseRequest.getPriorityId());
         newCase.setStatus("Open");
         newCase.setCreatedAt(LocalDateTime.now());
@@ -27,9 +30,21 @@ public class CaseService {
         newCase.setUpdatedAt(LocalDateTime.now());
         newCase.setUpdatedBy("System");
 
-        caseRepository.save(newCase);
-        return newCase;
+        Case savedCase = caseRepository.save(newCase);
+
+        // 🔁 Entity → DTO mapping
+        CaseDTO responseDto = new CaseDTO();
+        responseDto.setCaseId(savedCase.getCaseId());
+        responseDto.setCaseNumber(savedCase.getCaseNumber());
+        responseDto.setCaseTypeId(savedCase.getCaseTypeId());
+        responseDto.setPriorityId(savedCase.getPriorityId());
+        responseDto.setComplaint(savedCase.getComplaint());
+        responseDto.setStatus(savedCase.getStatus());
+        responseDto.setCreatedAt(savedCase.getCreatedAt());
+
+        return responseDto;
     }
+
 
     private String generateCaseNumber() {
         return "CASE-" + System.currentTimeMillis();
@@ -45,7 +60,6 @@ public class CaseService {
                     dto.setCaseNumber(c.getCaseNumber());
                     dto.setStatus(c.getStatus());
                     dto.setCreatedAt(c.getCreatedAt());
-                    dto.setCaseDesc(c.getComplaint());
                     dto.setPriorityId(c.getPriorityId());
                     return dto;
                 })

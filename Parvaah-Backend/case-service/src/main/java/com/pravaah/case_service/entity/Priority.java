@@ -6,23 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
-@Table(name="role_menu")
+@Table(name = "priority")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Priority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "priority_id")
+    private int priorityId;
 
-    private String roleName;
+    @Column(name = "priority_code")
+    private String priorityCode;
 
-    @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
-
-    private boolean isActive;
 }

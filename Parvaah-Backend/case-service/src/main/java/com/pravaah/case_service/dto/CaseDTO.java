@@ -17,12 +17,10 @@ public class CaseDTO {
     private String caseNumber;
     private String status;
     private LocalDateTime createdAt;
-    private String caseTitle;
-    private String caseDesc;
+//    private String caseTitle;
+//    private String caseDesc;
     private int priorityId;
     private Integer assignedTo;
     private int caseTypeId;
     private String complaint;
-
-
 }
