@@ -2,6 +2,8 @@ package com.pravaah.auth_service.service;
 
 import com.pravaah.auth_service.entity.User;
 import com.pravaah.auth_service.repo.UserRepository;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,12 @@ public class AuthService {
         return jwtService.generateToken(user);
     }
 
+    @PostConstruct
+    public void debugSecret() {
+        System.out.println("AUTH SERVICE JWT SECRET = [" + secret + "]");
+    }
+    @Value("${jwt.secret}")
+    private String secret;
 
 }
 
