@@ -6,6 +6,7 @@ import com.pravaah.case_service.entity.Case;
 import com.pravaah.case_service.service.CaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class CaseController {
     }
 
     @PostMapping("/create-case")
-    public ResponseEntity<ApiResponse<CaseDTO>> createCase(
+    public ResponseEntity<ApiResponse<CaseDTO>> createCase(Authentication authentication,
             @RequestBody CaseDTO caseRequest) {
 
         CaseDTO savedCase = caseService.createCase(caseRequest);
@@ -36,7 +37,8 @@ public class CaseController {
 
 
     @GetMapping("/allCases")
-    public ResponseEntity<ApiResponse<List<CaseDTO>>> getAllCases() {
+    public ResponseEntity<ApiResponse<List<CaseDTO>>> getAllCases(Authentication authentication) {
+        System.out.println(authentication.getName());
         List<CaseDTO> cases = caseService.getAllCases();
         ApiResponse<List<CaseDTO>> response =
                 new ApiResponse<>(200, "Fetched successfully", cases);

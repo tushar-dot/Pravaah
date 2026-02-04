@@ -5,6 +5,7 @@ import com.pravaah.case_service.dto.CaseDTO;
 import com.pravaah.case_service.dto.CaseTypeDTO;
 import com.pravaah.case_service.service.CaseTypeService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class CaseTypeController {
     }
 
     @GetMapping("/getAllCaseTypes")
-    public ResponseEntity<ApiResponse<List<CaseTypeDTO>>> getAllCaseTypes(){
+    public ResponseEntity<ApiResponse<List<CaseTypeDTO>>> getAllCaseTypes(Authentication authentication){
         List<CaseTypeDTO> caseTypes = caseTypeService.getAllCaseTypes();
         ApiResponse<List<CaseTypeDTO>> response =
                 new ApiResponse<>(200, "Fetched Case Types succesfully", caseTypes);

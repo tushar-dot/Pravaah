@@ -5,6 +5,7 @@ import com.pravaah.case_service.dto.CaseDTO;
 import com.pravaah.case_service.service.CaseAttachmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +23,7 @@ public class CaseAttachmentController {
 
     @PostMapping("saveAttachment")
     public ResponseEntity<ApiResponse<String>> saveAttachment(
-            @RequestParam Long caseId, @RequestParam MultipartFile file) throws IOException{
+            @RequestParam Long caseId, @RequestParam MultipartFile file, Authentication authentication) throws IOException{
 
         attachmentService.saveAttachment(caseId, file);
 
